@@ -1,31 +1,32 @@
 from core.board import Board
+from core.player import *
 
 class Game:
-    def __init__(self):
+    def __init__(self,white_player:Player,black_player:Player):
         self.b=Board()
         self.turn_white:bool=True
         self.running=True
+        self.white_player=white_player
+        self.black_player=black_player
 
-    def request_move(self,player_color, uci_move):
+    def request_turn(self):
         if(self.running==False):
             return False
-        if(player_color=="White" and self.turn_white==True):
-            chk=self.b.make_move(uci_move)
-            if(chk==False):
-                return False
-            self.turn_white=False
-            if(self.b.is_game_over()==True):
-                self.running=False
-            return True
-        elif(player_color=="Black" and self.turn_white==False):
-            chk=self.b.make_move(uci_move)
-            if(chk==False):
-                return False
-            self.turn_white=True
-            if(self.b.is_game_over()==True):
-                self.running=False
-            return True
-        
+        if(self.turn_white==True):
+            self.current_player=self.white_player
         else:
+            self.current_player=self.black_player
+        move=self.current_player.get_move(self)
+        if (move is None):
             return False
+        chk=self.b.make_move(move)
+        if(chk==False):
+            return False
+        self.turn_white=(not self.turn_white)
+        if(self.b.is_game_over()==True):
+            self.running=False
+        return True
 
+
+    def get_fen(self):
+        return self.b.get_fen()
