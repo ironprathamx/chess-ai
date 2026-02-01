@@ -23,10 +23,22 @@ class Game:
         if(chk==False):
             return False
         self.turn_white=(not self.turn_white)
-        if(self.b.is_game_over()==True):
+        if(self.b.board.is_game_over()==True):
             self.running=False
         return True
 
 
     def get_fen(self):
         return self.b.get_fen()
+
+    def is_running(self):
+        return self.running
+    
+    def get_curr_color(self):
+        if self.turn_white==True:
+            return "white"
+        else:
+            return "black"
+        
+    def print_board(self):
+        self.b.print_board()
