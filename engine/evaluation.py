@@ -1,5 +1,6 @@
-import chess
+"""Position evaluation for the native chess engine."""
 
+import chess
 PIECE_VALUES = {
     chess.PAWN:   100,
     chess.KNIGHT: 320,
@@ -23,6 +24,7 @@ def _material_score(board):
 
 
 def evaluate(board):
+    """Return a centipawn score from White's perspective."""
     if (board.is_checkmate()):
         if(board.turn==chess.WHITE):
             return -MATE_SCORE

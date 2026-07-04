@@ -1,7 +1,11 @@
+"""Game loop and turn management."""
+
 from core.board import Board
-from core.player import *
+from core.player import Player
+
 
 class Game:
+    """Coordinates two players, the board, and game-over detection."""
     def __init__(self,white_player:Player,black_player:Player):
         self.b=Board()
         self.turn_white:bool=True

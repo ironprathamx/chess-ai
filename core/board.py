@@ -1,6 +1,10 @@
+"""Board representation and move handling."""
+
 import chess
 
+
 class Board:
+    """Thin wrapper around python-chess for game state and UCI moves."""
     def __init__(self, fen=None):
         if(fen):
             self.board=chess.Board(fen)
@@ -22,8 +26,6 @@ class Board:
             return True
         else:
             return False
-        
-            
     def undo_move(self):
         try:
             self.board.pop()

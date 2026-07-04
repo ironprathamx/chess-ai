@@ -1,6 +1,10 @@
+"""UCI subprocess wrapper for the Stockfish chess engine."""
+
 import subprocess
 
+
 def get_best_move(fen):
+    """Return Stockfish's best move for the given FEN position (UCI format)."""
     engine=subprocess.Popen(["stockfish"],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
     engine.stdin.write("uci\n")
     engine.stdin.flush()
